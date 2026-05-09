@@ -53,13 +53,4 @@ cd windows
 
 ## 许可证
 
-**仓库根目录当前未包含 `LICENSE` 文件。** 若你希望 GitHub 正确展示开源协议、便于他人合规使用，请在根目录添加一份许可证（例如 MIT、Apache-2.0），并与各子项目中的许可说明保持一致。
-
-添加 `LICENSE` 后，可在此处用一句话写明 SPDX 标识（例如：`MIT`）。
-
----
-
-## 相关文档（macOS）
-
-- [App Store 上架说明](macos/Docs/AppStore_Submission.md)
-- [DMG 与开发者分发](macos/Docs/Distribution_DMG.md)
+本项目以 [**MIT License**](LICENSE)（SPDX：`MIT`）发布。完整条款见仓库根目录的 `LICENSE` 文件。

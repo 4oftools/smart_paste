@@ -233,7 +233,7 @@ smart_paste/
 
 ## 📄 许可证
 
-MIT License
+MIT License — 全文见仓库根目录 [LICENSE](../LICENSE)。
 
 ## 🤝 贡献
 
