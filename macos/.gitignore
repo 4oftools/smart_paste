@@ -1,0 +1,48 @@
+# Xcode / build
+build/
+DerivedData/
+*.xcarchive
+
+# User-specific Xcode data（scheme 管理、断点、界面状态等）
+xcuserdata/
+*.xcuserstate
+
+# Legacy Xcode user files
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Swift Package Manager（若日后引入 SPM）
+.build/
+.swiftpm/
+Packages/
+Package.pins
+.netrc
+
+# CocoaPods / Carthage（若日后使用）
+Pods/
+Carthage/Build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Archives / symbols（分发脚本外若本地生成）
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+# fastlane（若日后使用）
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
