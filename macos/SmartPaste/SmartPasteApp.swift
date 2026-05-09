@@ -31,6 +31,7 @@ struct SmartPasteApp: App {
         Window("设置", id: "settings") {
             SettingsView(appSettings: appSettings, historyStore: historyStore)
         }
+        .defaultSize(width: SettingsWindowLayout.width, height: SettingsWindowLayout.defaultHeight)
         .defaultLaunchBehavior(.suppressed)
     }
 }

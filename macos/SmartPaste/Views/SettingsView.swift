@@ -1,6 +1,12 @@
 import AppKit
 import SwiftUI
 
+/// 设置窗口固定宽度；与 `SettingsWindowWidthLock`、Scene 的 `defaultSize` 保持一致。
+enum SettingsWindowLayout {
+    static let width: CGFloat = 300
+    static let defaultHeight: CGFloat = 400
+}
+
 struct SettingsView: View {
     @ObservedObject var appSettings: AppSettings
     @ObservedObject var historyStore: HistoryStore
@@ -56,8 +62,9 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 440)
+        .frame(width: SettingsWindowLayout.width)
         .frame(minHeight: 360)
+        .background(SettingsWindowWidthLock())
         .smartPasteColorScheme(appSettings)
         .windowAppearance(appSettings.colorSchemePreference)
         .onAppear {
@@ -78,4 +85,33 @@ struct SettingsView: View {
             unlimited = true
         }
     }
+}
+
+// MARK: - 固定设置窗口水平尺寸，避免可横向拉伸时两侧露出窗口底色
+
+private final class SettingsWindowWidthAnchorView: NSView {
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        DispatchQueue.main.async { [weak self] in self?.applyWidthLock() }
+    }
+
+    private func applyWidthLock() {
+        guard let window else { return }
+        let w = SettingsWindowLayout.width
+        window.contentMinSize = NSSize(width: w, height: 260)
+        window.contentMaxSize = NSSize(width: w, height: 12_000)
+
+        let rect = window.contentLayoutRect
+        let targetH = max(rect.height, 360)
+        guard abs(rect.width - w) > 0.5 else { return }
+        window.setContentSize(NSSize(width: w, height: targetH))
+    }
+}
+
+private struct SettingsWindowWidthLock: NSViewRepresentable {
+    func makeNSView(context: Context) -> SettingsWindowWidthAnchorView {
+        SettingsWindowWidthAnchorView()
+    }
+
+    func updateNSView(_ nsView: SettingsWindowWidthAnchorView, context: Context) {}
 }

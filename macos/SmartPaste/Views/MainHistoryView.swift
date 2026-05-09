@@ -14,13 +14,6 @@ struct MainHistoryView: View {
     @State private var copyToastEpoch = 0
 
     private static let doubleTapMaxInterval: TimeInterval = 0.38
-    private static let dateFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .medium
-        f.timeStyle = .short
-        f.locale = Locale(identifier: "zh-Hans")
-        return f
-    }()
 
     private var filtered: [ClipboardItem] {
         let q = query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -176,7 +169,7 @@ struct MainHistoryView: View {
             Text(item.text)
                 .lineLimit(1)
                 .truncationMode(.tail)
-            Text(Self.dateFormatter.string(from: item.createdAt))
+            Text(ClipboardItem.listDisplayDateFormatter.string(from: item.createdAt))
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -187,7 +180,7 @@ struct MainHistoryView: View {
     private func detailContent(for item: ClipboardItem) -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                Text(Self.dateFormatter.string(from: item.createdAt))
+                Text(ClipboardItem.listDisplayDateFormatter.string(from: item.createdAt))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Text(item.text)

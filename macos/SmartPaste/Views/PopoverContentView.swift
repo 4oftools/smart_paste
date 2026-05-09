@@ -14,14 +14,6 @@ struct PopoverContentView: View {
     @State private var showCopyToast = false
     @State private var copyToastEpoch = 0
 
-    private static let timeFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .none
-        f.timeStyle = .medium
-        f.locale = Locale(identifier: "zh-Hans")
-        return f
-    }()
-
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             header
@@ -159,7 +151,7 @@ struct PopoverContentView: View {
                         ForEach(Array(historyStore.items.prefix(10))) { item in
                             PopoverPasteSwipeRow(
                                 item: item,
-                                timeText: Self.timeFormatter.string(from: item.createdAt),
+                                timeText: ClipboardItem.listDisplayDateFormatter.string(from: item.createdAt),
                                 revealedSwipeItemID: $revealedSwipeItemID,
                                 onCopy: {
                                     historyStore.copyToPasteboard(item)
